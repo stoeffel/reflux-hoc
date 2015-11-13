@@ -1,0 +1,44 @@
+{
+  "name": "reflux-hoc",
+  "version": "0.0.0",
+  "description": "HOC for reflux",
+  "license": "MIT",
+  "repository": "stoeffel/reflux-hoc",
+  "author": {
+    "name": "Christoph Hermann",
+    "email": "schtoeffel@gmail.com",
+    "url": "stoeffel.github.io"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "build": "babel module --out-dir ./",
+    "develop": "nodangel --ignore node_modules --watch __tests__ --watch module --exec 'npm run test'",
+    "test": "mocha --compilers js:babel/register",
+    "patch-release": "npm run build && npm version patch && npm publish && git push --follow-tags",
+    "minor-release": "npm run build && npm version minor && npm publish && git push --follow-tags",
+    "major-release": "npm run build && npm version major && npm publish && git push --follow-tags"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "react",
+    "reflux",
+    "hoc"
+  ],
+  "dependencies": {
+    "@thisables/curry": "^7.0.0"
+  },
+  "devDependencies": {
+    "babel": "^5.6.3",
+    "babel-core": "^5.5.6",
+    "jsdom-test-browser": "^4.0.2",
+    "mocha": "^2.3.4",
+    "nodangel": "1.3.8",
+    "react": "^0.14.2",
+    "react-addons-test-utils": "^0.14.2",
+    "reflux": "^0.3.0"
+  }
+}
