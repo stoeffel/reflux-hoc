@@ -40,6 +40,19 @@ const ConnectedComponent = connect(Store, 'onStoreChange', Component);
 action();
 ```
 
+You can use it with es7 decorators as well.
+
+```jsx
+@connect(Store, 'onStoreChange')
+class Component extends React.Component {
+	onStoreChange () {
+		done();
+	}
+
+	render () { return <h1>Fire</h1> }
+}
+```
+
 ## API
 
 ```js

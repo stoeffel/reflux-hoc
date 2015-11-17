@@ -39,4 +39,32 @@ describe('Reflux-hoc', () => {
 		action();
 	});
 
+  it('', done => {
+		const action = Reflux.createAction("fireBall");
+
+		const Store = Reflux.createStore({
+			init () {
+				this.listenTo(action, this.onFireBall);
+			},
+			onFireBall (){
+				this.trigger('fire');
+			}
+		});
+
+
+		@connect(Store, 'onStoreChange')
+		class Component extends React.Component {
+			onStoreChange () {
+				done();
+			}
+
+			render () { return <h1>Fire</h1> }
+		}
+
+		TestUtils.renderIntoDocument(
+      <Component />
+    );
+
+		action();
+	});
 });
