@@ -4,67 +4,96 @@ import TestUtils from 'react-addons-test-utils';
 import bro from 'jsdom-test-browser';
 import { equal } from 'assert';
 
-import connect from '../module/';
+import connect, {connectToData} from '../module/';
 
 describe('Reflux-hoc', () => {
 
-	before(done => bro.newBrowser(done));
+  before(done => bro.newBrowser(done));
 
   it('', done => {
-		const action = Reflux.createAction("fireBall");
+    const action = Reflux.createAction("fireBall");
 
-		const Store = Reflux.createStore({
-			init () {
-				this.listenTo(action, this.onFireBall);
-			},
-			onFireBall (){
-				this.trigger('fire');
-			}
-		});
+    const Store = Reflux.createStore({
+      init () {
+        this.listenTo(action, this.onFireBall);
+      },
+      onFireBall (){
+        this.trigger('fire');
+      }
+    });
 
-		const Component = React.createClass({
-			onStoreChange () {
-				done();
-			},
+    const Component = React.createClass({
+      onStoreChange () {
+        done();
+      },
 
-			render () { return <h1>Fire</h1> }
-		});
+      render () { return <h1>Fire</h1> }
+    });
 
-		const ConnectedComponent = connect(Store)('onStoreChange')(Component);
+    const ConnectedComponent = connect(Store)('onStoreChange')(Component);
 
-		TestUtils.renderIntoDocument(
+    TestUtils.renderIntoDocument(
       <ConnectedComponent />
     );
 
-		action();
-	});
+    action();
+  });
 
   it('', done => {
-		const action = Reflux.createAction("fireBall");
+    const action = Reflux.createAction("fireBall");
 
-		const Store = Reflux.createStore({
-			init () {
-				this.listenTo(action, this.onFireBall);
-			},
-			onFireBall (){
-				this.trigger('fire');
-			}
-		});
+    const Store = Reflux.createStore({
+      init () {
+        this.listenTo(action, this.onFireBall);
+      },
+      onFireBall (){
+        this.trigger('fire');
+      }
+    });
 
 
-		@connect(Store, 'onStoreChange')
-		class Component extends React.Component {
-			onStoreChange () {
-				done();
-			}
+    @connect(Store, 'onStoreChange')
+    class Component extends React.Component {
+      onStoreChange () {
+        done();
+      }
 
-			render () { return <h1>Fire</h1> }
-		}
+      render () { return <h1>Fire</h1> }
+    }
 
-		TestUtils.renderIntoDocument(
+    TestUtils.renderIntoDocument(
       <Component />
     );
 
-		action();
-	});
+    action();
+  });
+
+  it('', done => {
+    const action = Reflux.createAction("fireBall");
+
+    const Store = Reflux.createStore({
+      init () {
+        this.listenTo(action, this.onFireBall);
+      },
+      onFireBall (){
+        this.trigger('fire');
+      }
+    });
+
+    const Component = React.createClass({
+      componentWillReceiveProps (nextProps) {
+        equal(nextProps.fire, 'fire');
+	done();
+      },
+      render () { return <h1>Fire</h1> }
+    });
+
+    const ConnectedComponent = connectToData({ fire : Store })(Component);
+
+    TestUtils.renderIntoDocument(
+      <ConnectedComponent />
+    );
+
+    action();
+  });
 });

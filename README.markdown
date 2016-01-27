@@ -20,19 +20,19 @@ import connect from 'reflux-hoc';
 const action = Reflux.createAction("fireBall");
 
 const Store = Reflux.createStore({
-	init () {
-		this.listenTo(action, this.onFireBall);
-	},
-	onFireBall (){
-	}
+  init () {
+    this.listenTo(action, this.onFireBall);
+  },
+  onFireBall (){
+  }
 });
 
 const Component = React.createClass({
-	onStoreChange () {
-		// called on change
-	},
+  onStoreChange () {
+    // called on change
+  },
 
-	render () { return <h1>Fire</h1> }
+  render () { return <h1>Fire</h1> }
 });
 
 const ConnectedComponent = connect(Store, 'onStoreChange', Component);
@@ -45,13 +45,32 @@ You can use it with es7 decorators as well.
 ```jsx
 @connect(Store, 'onStoreChange')
 class Component extends React.Component {
-	onStoreChange () {
-		done();
-	}
+  onStoreChange () {
+    done();
+  }
 
-	render () { return <h1>Fire</h1> }
+  render () { return <h1>Fire</h1> }
 }
 ```
+
+You can directly get the data from a stores as `props` with `connectToData`.
+
+```jsx
+import { connectToData } from 'reflux-hoc';
+
+@connectToData({ users: UserStore })
+class Component extends React.Component {
+  render () {
+    if (!this.props.users) return null;
+
+    return (
+      <ul>
+        {this.props.users.map(u => <li>{u.name}</li>)}
+      </ul>);
+  }
+}
+```
+
 
 ## API
 
@@ -67,6 +86,8 @@ const connectToStores = connect([Store1, Store2]);
 
 connectToStores('onStoresChange', Compnent);
 
+// connectToData :: { a: Store } -> Component -> Component
+connectToData({ persons: PersonStore, posts: PostStore }, Component);
 ```
 
 
