@@ -82,13 +82,15 @@ describe('Reflux-hoc', () => {
 
     const Component = React.createClass({
       componentWillReceiveProps (nextProps) {
-        equal(nextProps.fire, 'fire');
-	done();
+	if (this.props.fire !== nextProps.fire) {
+          equal(nextProps.fire, 'fire');
+          done();
+	}
       },
       render () { return <h1>Fire</h1> }
     });
 
-    const ConnectedComponent = connectToData({ fire : Store })(Component);
+    const ConnectedComponent = connectToData({ fire : Store }, {fire: 'fail'})(Component);
 
     TestUtils.renderIntoDocument(
       <ConnectedComponent />
