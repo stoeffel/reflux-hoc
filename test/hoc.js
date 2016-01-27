@@ -90,7 +90,7 @@ describe('Reflux-hoc', () => {
       render () { return <h1>Fire</h1> }
     });
 
-    const ConnectedComponent = connectToData({ fire : Store }, {fire: 'fail'})(Component);
+    const ConnectedComponent = connectToData({ fire : Store }, () => ({fire: 'fail'}))(Component);
 
     TestUtils.renderIntoDocument(
       <ConnectedComponent />

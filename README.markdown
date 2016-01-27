@@ -58,7 +58,7 @@ You can directly get the data from a stores as `props` with `connectToData`.
 ```jsx
 import { connectToData } from 'reflux-hoc';
 
-@connectToData({ users: UserStore }, { users: [] })
+@connectToData({ users: UserStore }, () => ({ users: [] }))
 class Component extends React.Component {
   render () {
     if (!this.props.users) return null;
@@ -86,8 +86,8 @@ const connectToStores = connect([Store1, Store2]);
 
 connectToStores('onStoresChange', Compnent);
 
-// connectToData :: { a: Store } -> { a: * } -> Component -> Component
-connectToData({ persons: PersonStore, posts: PostStore }, initialState, Component);
+// connectToData :: { a: Store } -> ({ a: * }) -> Component -> Component
+connectToData({ persons: PersonStore, posts: PostStore }, () => ( { persons: [], posts: [] } ), Component);
 ```
 
 

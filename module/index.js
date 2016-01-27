@@ -27,10 +27,10 @@ function connect (stores, onChange, component) {
 };
 export default connect::curry();
 
-const _connectToData = (stores, initialState, component) => {
+const _connectToData = (stores, init, component) => {
   return React.createClass({
     getInitialState() {
-      return initialState;
+      return init();
     },
 
     componentDidMount() {
