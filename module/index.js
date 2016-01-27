@@ -42,7 +42,7 @@ const _connectToData = (stores, initialState, component) => {
 
     onChange(key, data) {
       const newState = {};
-      newState[key] = data
+      newState[key] = data[key]? data[key]: data;
       this.setState(newState);
     },
 
