@@ -30,7 +30,7 @@ export default connect::curry();
 const _connectToData = (stores, init, component) => {
   return React.createClass({
     getInitialState() {
-      return init();
+      return init(this.props);
     },
 
     componentDidMount() {
