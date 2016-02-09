@@ -6,6 +6,7 @@
 
 > Higher order component for [reflux][r]
 
+
 ## Installation
 
 ```
@@ -14,18 +15,34 @@ $ npm install --save reflux-hoc
 
 ## Usage
 
+### passing the data as props
+
+You can directly get the data from a stores as `props` with `connectToData`.
+
+```jsx
+import { connectToData } from 'reflux-hoc';
+
+connectToData(
+  { users: UserStore } // the store you want to connect to.
+, (props) => ({ users: users.getUsers() }) // this function is call for the initialState and if the store changes.
+, function({ users }) { // the users are passed down as a prop
+    return (
+      <ul>
+        {this.props.users.map(u => <li>{u.name}</li>)}
+      </ul>);
+  }
+);
+```
+
+### with a onChange callback on the component
+
+:biohazard_sign: :biohazard_sign: :biohazard_sign:
+This uses calls the provided `onChange` function on the child component.
+If you use more then one HOC, make sure connect` is applied directly to the component.
+:biohazard_sign: :biohazard_sign: :biohazard_sign:
+
 ```jsx
 import connect from 'reflux-hoc';
-
-const action = Reflux.createAction("fireBall");
-
-const Store = Reflux.createStore({
-  init () {
-    this.listenTo(action, this.onFireBall);
-  },
-  onFireBall (){
-  }
-});
 
 const Component = React.createClass({
   onStoreChange () {
@@ -36,43 +53,19 @@ const Component = React.createClass({
 });
 
 const ConnectedComponent = connect(Store, 'onStoreChange', Component);
-
-action();
 ```
 
-You can use it with es7 decorators as well.
-
-```jsx
-@connect(Store, 'onStoreChange')
-class Component extends React.Component {
-  onStoreChange () {
-    done();
-  }
-
-  render () { return <h1>Fire</h1> }
-}
-```
-
-You can directly get the data from a stores as `props` with `connectToData`.
-
-```jsx
-import { connectToData } from 'reflux-hoc';
-
-@connectToData({ users: UserStore }, () => ({ users: [] }))
-class Component extends React.Component {
-  render () {
-    if (!this.props.users) return null;
-
-    return (
-      <ul>
-        {this.props.users.map(u => <li>{u.name}</li>)}
-      </ul>);
-  }
-}
-```
 
 
 ## API
+
+### connectToData
+
+// connectToData :: { a: Store } -> ({ a: * }) -> Component -> Component
+connectToData({ persons: PersonStore, posts: PostStore }, () => ( { persons: [], posts: [] } ), Component);
+```
+
+### connect
 
 ```js
 // connect :: Store -> String -> Component -> Component
@@ -85,10 +78,6 @@ connect([Store1, Store2], CallbackName, Component);
 const connectToStores = connect([Store1, Store2]);
 
 connectToStores('onStoresChange', Compnent);
-
-// connectToData :: { a: Store } -> ({ a: * }) -> Component -> Component
-connectToData({ persons: PersonStore, posts: PostStore }, () => ( { persons: [], posts: [] } ), Component);
-```
 
 
 ## License
