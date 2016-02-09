@@ -3,6 +3,8 @@
 [![Travis](https://img.shields.io/travis/stoeffel/reflux-hoc.svg?style=flat-square)](https://travis-ci.org/stoeffel/reflux-hoc)
 [![David](https://img.shields.io/david/stoeffel/reflux-hoc.svg?style=flat-square)](https://david-dm.org/stoeffel/reflux-hoc)
 [![npm](https://img.shields.io/npm/v/reflux-hoc.svg?style=flat-square)](https://www.npmjs.com/package/reflux-hoc)
+[![codecov.io](https://codecov.io/github/stoeffel/reflux-hoc/coverage.svg?branch=master)](https://codecov.io/github/stoeffel/reflux-hoc?branch=master)
+
 
 > Higher order component for [reflux][r]
 

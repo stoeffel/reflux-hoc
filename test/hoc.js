@@ -10,7 +10,7 @@ describe('Reflux-hoc', () => {
 
   before(done => bro.newBrowser(done));
 
-  it('', done => {
+  it('#connect', done => {
     const action = Reflux.createAction("fireBall");
 
     const Store = Reflux.createStore({
@@ -39,7 +39,7 @@ describe('Reflux-hoc', () => {
     action();
   });
 
-  it('', done => {
+  it('#connectToData', done => {
     const action = Reflux.createAction("fireBall");
 
     const Store = Reflux.createStore({
