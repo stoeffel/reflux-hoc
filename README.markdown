@@ -36,10 +36,10 @@ connectToData(
 
 ### with a onChange callback on the component
 
-:biohazard_sign: :biohazard_sign: :biohazard_sign:
+:exclamation:
 This uses calls the provided `onChange` function on the child component.
 If you use more then one HOC, make sure connect` is applied directly to the component.
-:biohazard_sign: :biohazard_sign: :biohazard_sign:
+:exclamation:
 
 ```jsx
 import connect from 'reflux-hoc';
