@@ -7,8 +7,10 @@ const isArray = arg =>
 
 function connect (stores, onChange, component) {
   const theStores = isArray(stores)? stores: [stores];
+  const keys = Object.keys(stores);
 
   return React.createClass({
+    displayName: 'connect-' + keys.join('-'),
     componentDidMount() {
       this.unsubscribe = theStores.map(store => store.listen(this.node[onChange]));
     },
@@ -28,7 +30,11 @@ function connect (stores, onChange, component) {
 export default connect::curry();
 
 const _connectToData = (stores, init, component) => {
+  const keys = Object.keys(stores);
+
   return React.createClass({
+    displayName: 'connect-to-data-' + keys.join('-'),
+
     getInitialState() {
       return init(this.props);
     },
