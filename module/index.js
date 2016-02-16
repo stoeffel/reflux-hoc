@@ -36,7 +36,7 @@ const _connectToData = (stores, init, component) => {
     displayName: 'connect-to-data-' + keys.join('-'),
 
     getInitialState() {
-      return init(this.props);
+      return init(this.props, {});
     },
 
     componentDidMount() {
@@ -49,7 +49,7 @@ const _connectToData = (stores, init, component) => {
     onChange(key, data) {
       const newState = {};
       newState[key] = data[key]? data[key]: data;
-      this.setState({...this.getInitialState(), ...newState});
+      this.setState(init(this.props, newState));
     },
 
     componentWillUnmount() {

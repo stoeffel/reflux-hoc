@@ -55,13 +55,14 @@ describe('Reflux-hoc', () => {
       componentWillReceiveProps (nextProps) {
 	if (this.props.fire !== nextProps.fire) {
           equal(nextProps.fire, 'fire');
+          equal(nextProps.fireInit, 'init');
           done();
 	}
       },
       render () { return <h1>Fire</h1> }
     });
 
-    const ConnectedComponent = connectToData({ fire : Store }, () => ({fire: 'fail'}))(Component);
+    const ConnectedComponent = connectToData({ fire : Store }, (props, {fire}) => ({fireInit: 'init', fire}))(Component);
 
     TestUtils.renderIntoDocument(
       <ConnectedComponent />

@@ -26,7 +26,7 @@ import { connectToData } from 'reflux-hoc';
 
 connectToData(
   { users: UserStore } // the store you want to connect to.
-, (props) => ({ users: users.getUsers() }) // this function is call for the initialState and if the store changes.
+, (props, actionData) => ({ users: users.getUsers() }) // this function is call for the initialState and if the store changes.
 , function({ users }) { // the users are passed down as a prop
     return (
       <ul>
@@ -63,8 +63,8 @@ const ConnectedComponent = connect(Store, 'onStoreChange', Component);
 
 ### connectToData
 
-// connectToData :: { a: Store } -> ({ a: * }) -> Component -> Component
-connectToData({ persons: PersonStore, posts: PostStore }, () => ( { persons: [], posts: [] } ), Component);
+// connectToData :: { b: Store } -> ({ a: * }) -> Component -> Component
+connectToData({ PersonStore, PostStore }, (props, actionData) => ( { persons: PersonStore.getPersons(), posts: PostStore.getPosts() } ), Component);
 ```
 
 ### connect
