@@ -46,7 +46,7 @@ const _connectToData = (stores, init, component) => {
       });
     },
 
-    onChange(key, data) {
+    onChange(key, data = {}) {
       const newState = {};
       newState[key] = data[key]? data[key]: data;
       this.setState(init(this.props, newState));
