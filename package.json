@@ -1,6 +1,6 @@
 {
   "name": "reflux-hoc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "HOC for reflux",
   "license": "MIT",
   "repository": "stoeffel/reflux-hoc",
