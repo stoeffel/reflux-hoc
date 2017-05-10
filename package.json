@@ -39,7 +39,7 @@
     "babel-preset-es2015": "6.9.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
-    "codecov": "1.0.1",
+    "codecov": "2.2.0",
     "isparta": "4.0.0",
     "jsdom-test-browser": "4.0.2",
     "mocha": "2.3.4",
